@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Tienda - Administrador</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e2f;
+      color: #fff;
+    }
+
+    header {
+      padding: 1rem;
+      background-color: #292942;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-bottom: 2px solid #444;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background-color: #2a2a3d;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #383857;
+    }
+
+    tr:hover {
+      background-color: #3d3d5c;
+    }
+
+    .filter-bar {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .filter-bar input, .filter-bar select {
+      padding: 0.5rem;
+      background-color: #2a2a3d;
+      border: 1px solid #555;
+      color: #fff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Historial de Actividades - Panel Administrador
+  </header>
+  <div class="container">
+    <div class="filter-bar">
+      <input type="text" placeholder="Buscar por usuario o acción...">
+      <select>
+        <option value="">Filtrar por tipo</option>
+        <option value="venta">Venta</option>
+        <option value="registro">Registro de producto</option>
+        <option value="eliminación">Eliminación de producto</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Acción</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>03/05/2025 14:33</td>
+          <td>admin01</td>
+          <td>Registro de producto</td>
+          <td>Agregó "Teclado Gamer RGB"</td>
+        </tr>
+        <tr>
+          <td>03/05/2025 13:15</td>
+          <td>admin02</td>
+          <td>Eliminación de producto</td>
+          <td>Eliminó "Mouse Inalámbrico Azul"</td>
+        </tr>
+        <tr>
+          <td>02/05/2025 19:20</td>
+          <td>admin01</td>
+          <td>Venta</td>
+          <td>Confirmó venta #54321</td>
+        </tr>
+        <!-- Puedes agregar más filas aquí -->
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
