@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="CSS/bootstrap.min.css" />
+  <script src="JS/jquery-3.7.1.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background-image 0.8s ease;
+    }
+
+    .rol-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.15);
+    }
+
+    .rol-card:hover,
+    .rol-card.selected {
+      transform: scale(1.05);
+      border: 2px solid #00bcd4;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+    }
+
+    #formularioContainer {
+      border-radius: 16px;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
+    }
+
+    .form-overlay {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem;
+      border-radius: 16px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background-color: #00bcd4;
+      border-color: #00bcd4;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0097a7;
+      border-color: #0097a7;
+    }
+
+    .btn-success {
+      background-color: #4caf50;
+      border-color: #4caf50;
+    }
+
+    .btn-success:hover {
+      background-color: #388e3c;
+      border-color: #388e3c;
+    }
+
+    .text-primary {
+      color: #00bcd4 !important;
+    }
+
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: #00bcd4;
+      box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25);
+    }
+
+    .invalid-feedback {
+      color: #ff4d4d;
+    }
+
+    .is-valid {
+      border-color: #4caf50;
+    }
+
+    .is-invalid {
+      border-color: #ff4d4d;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      let selectedRol = "";
+
+      const fondos = {
+        usuario: "url('Imagenes/lolp.jpg')",
+        administrador: "url('Imagenes/Administrador.jpg')",
+        vendedor: "url('Imagenes/habilidades-clave-vendedores.jpg')"
+      };
+
+      $(".rol-card").click(function () {
+        $(".rol-card").removeClass("selected");
+        $(this).addClass("selected");
+        selectedRol = $(this).data("rol");
+
+        $("body").css("background-image", fondos[selectedRol]);
+      });
+
+      $("#loginForm").on("submit", function (e) {
+        e.preventDefault();
+        let validado = true;
+
+        if (!selectedRol) {
+          alert("Selecciona un rol para continuar");
+          return;
+        }
+
+        let correo = $("#correo").val();
+        let correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!correoRegex.test(correo)) {
+          $("#correo").addClass("is-invalid");
+          validado = false;
+        } else {
+          $("#correo").removeClass("is-invalid").addClass("is-valid");
+        }
+
+        let password = $("#password").val();
+        if (password.length < 6) {
+          $("#password").addClass("is-invalid");
+          validado = false;
+        } else {
+          $("#password").removeClass("is-invalid").addClass("is-valid");
+        }
+
+        if (validado) {
+          switch (selectedRol) {
+            case "usuario":
+              window.location.href = "Tienda.html";
+              break;
+            case "administrador":
+              window.location.href = "Administrador.html";
+              break;
+            case "vendedor":
+              window.location.href = "Vendedor.html";
+              break;
+          }
+        }
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-dark text-white">
+  <div class="container py-5">
+    <h2 class="text-center text-primary mb-4">Selecciona tu Inicio de Sesión</h2>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-3">
+        <div class="card text-center p-3 rol-card text-light" data-rol="usuario">
+          <h5 class="card-title">Usuario</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-3 rol-card text-light" data-rol="administrador">
+          <h5 class="card-title">Administrador</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-3 rol-card text-light" data-rol="vendedor">
+          <h5 class="card-title">Vendedor</h5>
+        </div>
+      </div>
+    </div>
+
+    <div id="formularioContainer" class="col-md-6 mx-auto shadow fade-in show">
+      <div class="form-overlay">
+        <h3 class="text-center text-secondary mb-3 text-light">Iniciar Sesión</h3>
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" />
+            <div class="invalid-feedback">El correo electrónico no es válido</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" />
+            <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres</div>
+          </div>
+
+          <div class="mb-3 text-center">
+            <button class="btn btn-primary" type="submit">Ingresar</button>
+            <a href="CrearCuenta.html" class="btn btn-success">Registrarse</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+

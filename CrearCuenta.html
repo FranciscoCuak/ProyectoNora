@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    
+    <!-- Estilos Nebhula directamente en el HTML -->
+    <style>
+        body {
+            background-color: #0e0e1a;
+            color: #e0e0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .nebhula-card {
+            background-color: #1e1e2f;
+            border: 1px solid #444;
+        }
+
+        .nebhula-primary {
+            color: #7fc7ff;
+        }
+
+        .btn-nebhula {
+            background-color: #7fc7ff;
+            border: none;
+            color: #000;
+        }
+
+        .btn-nebhula:hover {
+            background-color: #5fb0e0;
+        }
+
+        .form-control {
+            background-color: #2c2c3e;
+            color: #e0e0f0;
+            border: 1px solid #555;
+        }
+
+        .form-control:focus {
+            background-color: #2c2c3e;
+            color: #fff;
+            border-color: #7fc7ff;
+            box-shadow: 0 0 0 0.2rem rgba(127, 199, 255, 0.25);
+        }
+
+        .form-check-input {
+            background-color: #2c2c3e;
+            border: 1px solid #555;
+        }
+
+        .form-check-label {
+            color: #ccc;
+        }
+
+        .invalid-feedback {
+            color: #ff6b6b;
+        }
+
+        .is-valid {
+            border-color: #28a745;
+        }
+
+        .is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
+
+    <script src="JS/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#Registro").on("submit", function(e){
+                e.preventDefault();
+                let validado = true;
+                
+                let nombre = $("#nombre").val();
+                if (nombre.length < 3) {
+                    $("#nombre").addClass("is-invalid");
+                    validado = false;
+                } else {
+                    $("#nombre").removeClass("is-invalid").addClass("is-valid");
+                }
+
+                let correo = $("#correo").val();
+                let correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!correoRegex.test(correo)) {
+                    $("#correo").addClass("is-invalid");
+                    validado = false;
+                } else {
+                    $("#correo").removeClass("is-invalid").addClass("is-valid");
+                }
+
+                let password = $("#password").val();
+                if (password.length < 6) {
+                    $("#password").addClass("is-invalid");
+                    validado = false;
+                } else {
+                    $("#password").removeClass("is-invalid").addClass("is-valid");
+                }
+
+                if (!$("#terminos").prop("checked")) {
+                    alert("Debes aceptar los términos y condiciones");
+                    validado = false;
+                }
+
+                if (validado) {
+                    alert("Formulario enviado correctamente");
+                    this.submit();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <h2 class="text-center nebhula-primary">FORMULARIO DE REGISTRO</h2>
+                <h5 class="text-center text-secondary">Bienvenido nuevo cliente a la experiencia SAC</h5>
+                <form action="#" id="Registro" class="nebhula-card p-5 shadow rounded mt-4">   
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo">
+                        <div class="invalid-feedback">El correo electrónico no es válido</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres</div>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terminos">
+                        <label for="terminos" class="form-check-label">Acepto los términos y condiciones</label>
+                    </div>
+                    
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-nebhula me-2" type="submit">Enviar</button>
+                        <a href="Login.html" class="btn btn-outline-light">Acceder con cuenta existente</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
